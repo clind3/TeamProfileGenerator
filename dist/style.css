@@ -1,6 +1,6 @@
 
 header {
-    height: 10%;
+    height: 30%;
     min-width: 100%;
     /* position: fixed; */
     background-color: rgb(243, 51, 51);
@@ -12,9 +12,16 @@ h1,h2 {
     text-align: center;
     /* padding-top: 50px;
     padding-bottom: 50px; */
-    font-size:40px;
+    font-size:60px;
 }
 
+body {
+    background: url(assets/teambckgrnd.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
 main {
     padding: 10%;
     width: 100%;

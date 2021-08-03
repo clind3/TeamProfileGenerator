@@ -1,43 +1,56 @@
-class Questions {
-    generalInfo = [
-        {
-            name: 'name',
-            type: 'input',
-            message: "What is the Employee's name?",
-        },
-        {
-            name: 'id',
-            type: 'input',
-            message: 'Enter their Employee ID:',
-        },
-        {
-            name: 'email',
-            type: 'input',
-            message: 'Enter their email address:',
-        },
-    ]
 
-    managerInfo = [{
-        name: 'officeNumber',
+const generalInfo = [
+    {
+        name: 'name',
         type: 'input',
-        message: 'Enter their office number:',
-    }]
-
-    engineerInfo = [{
-        name: 'github',
+        message: "What is the Employee's name?",
+    },
+    {
+        name: 'id',
         type: 'input',
-        message: 'Enter your github link:',
-    }]
-
-    internInfo = [{
-        name: 'school',
+        message: 'Enter their Employee ID:',
+    },
+    {
+        name: 'email',
         type: 'input',
-        message: 'Enter your school:',
-    }]
-}
+        message: 'Enter their email address:',
+        validate: function (email) {
+            valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
+
+            if (valid) {
+                console.log(" Great job!");
+                return true;
+            } else {
+                console.log(".  Please enter a valid email")
+                return false;
+            }
+        }
+
+    }
+]
+
+const managerInfo = [{
+    name: 'officeNumber',
+    type: 'input',
+    message: 'Enter their office number:',
+}]
+
+const engineerInfo = [{
+    name: 'github',
+    type: 'input',
+    message: 'Enter your github link:',
+}]
+
+const internInfo = [{
+    name: 'school',
+    type: 'input',
+    message: 'Enter your school:',
+}]
 
 
-const outputFile = `
+
+function writeOutput(data) {
+    outputFile = `
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,7 +70,7 @@ const outputFile = `
     </header>
     <main class="row row-cols-1 row-cols-md-3 g-4" id="employeeCards">
        
-        ${profiles}
+        ${data}
 
     </main>
 </body>
@@ -67,8 +80,11 @@ const outputFile = `
 <script src='/index.js'></script>
 <script src='/src/generateCard.js'></script>
 
-</html>` ;
+</html>`;
+
+    return outputFile;
+}
 
 
 
-module.exports = { Questions, outputFile }
+module.exports = { generalInfo, managerInfo, engineerInfo, internInfo, writeOutput }

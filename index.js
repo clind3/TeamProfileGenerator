@@ -1,18 +1,17 @@
 //import questions, inquirer, and classes
 const inquirer = require('inquirer');
-const {Questions, outputFile} = require('./src/constants');
+const constantsFile = require('./src/constants');
 const {Card} = require('./src/generateCard');
 const { Manager } = require('./lib/Manager');
 const {Engineer} = require('./lib/Engineer');
 const {Intern} = require('./lib/Intern');
 const fs = require('fs');
-
 //create question variables
-const manager = Questions.generalInfo.concat(Questions.managerInfo);
-const engineer = Questions.generalInfo.concat(Questions.engineerInfo);
-const intern = Questions.generalInfo.concat(Questions.internInfo);
+const manager = constantsFile.generalInfo.concat(constantsFile.managerInfo);
+const engineer = constantsFile.generalInfo.concat(constantsFile.engineerInfo);
+const intern = constantsFile.generalInfo.concat(constantsFile.internInfo);
 const card = new Card();
-const profiles = '';
+let profiles = '';
 
 //create user action list
 const selectAction = () => {
@@ -31,6 +30,7 @@ const selectAction = () => {
                 break;
             case 'Finalize Team':
                 console.log('finalizing!!');
+                writingFile()
                 break;
                 
         }
@@ -42,7 +42,8 @@ const askEngineer = () => {
     inquirer.prompt(engineer).then((info) => {
     //will need to create eng. object then create card
     let newEng = new Engineer(info.name, info.id, info.email, info.github);
-    card.getInfo(newEng);
+    profiles += card.getInfo(newEng);
+    console.log('index.js FILE'+ profiles);
     console.log('added engineer');
     selectAction();
 })}
@@ -52,8 +53,9 @@ const askIntern =() => {
     inquirer.prompt(intern).then((info) => {
         //will need to create intern object then create card
         const newIntern = new Intern(info.name, info.id, info.email, info.school);
-        card.getInfo(newIntern);
+        profiles += card.getInfo(newIntern);
         console.log('added intern');
+        console.log('index.js FILE'+ profiles);
         selectAction();
     })
 }
@@ -64,15 +66,16 @@ inquirer.prompt(manager).then(async (answers)=>{
     //will use those answers to create Manager card
     const newMngr = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
     //add new card with given info
-    card.getInfo(newMngr);
+    profiles += card.getInfo(newMngr);
+    console.log('index.js FILE'+ profiles);
     //prompt user with options of what to do next (continue to ask until user selects finalize)
     selectAction();
 }) 
   
 function writingFile() {
     //create write file function
-    fs.writeFile("../dist/index.html", output, (err) => {
-    err ? console.log(err) : console.log(messages.saved);
+    fs.writeFile('./dist/index.html', constantsFile.writeOutput(profiles), (err) => {
+    err ? console.log(err) : console.log(profiles);
     });
 }
 module.exports = profiles;

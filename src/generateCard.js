@@ -1,4 +1,4 @@
-let element = window.document.getElementById("employeeCards");
+
 //will include js code to create team Cards
 function Card() {
     cardList = []
@@ -10,7 +10,7 @@ function createCard(addToEnd, classInfo) {
     <div class="col-sm-6" style="max-width: 18rem;">
             <div class="profileCard">
                 <div class="card h-100">
-                    <div class="card-header text-white bg-primary">
+                    <div class="card-header text-white ${classInfo.headerColor()}">
                         <h3>${classInfo.getName()}</h3>
                         <h5 class="card-title">${classInfo.getRole()}</h5>
                     </div>
@@ -24,27 +24,34 @@ function createCard(addToEnd, classInfo) {
                 </div>
             </div>
         </div> `
-    console.log(addToEnd + ' '+ classInfo.getName());
+    console.log(profileCard);
     return profileCard;
 }
 
 Card.prototype.getInfo = function (createdClass) {
     let role = createdClass.getRole();
-    console.log(role);
+    // console.log(role);
+    let cardHtml = '';
     switch (role) {
         case 'Manager':
-           createCard('created', createdClass);
+            let officeNumber = createdClass.getOffice();
+            addToEnd = `Office Number : ${officeNumber}`;
+           cardHtml = createCard(addToEnd, createdClass);
             break;
             
         case 'Intern':
             let school = createdClass.getSchool();
-            createCard('will need to get school value in format', createdClass);
+            addToEnd = `School: ${school}`;
+            cardHtml = createCard(addToEnd, createdClass);
             break;
         case 'Engineer':
             let github = createdClass.getGithub();
-            createCard('will need to get github value in format', createdClass);
+            addToEnd =  `Github: ${github}`;
+            cardHtml = createCard(addToEnd , createdClass);
             break;
     }
+    console.log('generatedCard FILE' + cardHtml);
+    return cardHtml;
     
 }
 
