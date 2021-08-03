@@ -1,16 +1,18 @@
 //import questions, inquirer, and classes
 const inquirer = require('inquirer');
-const questions = require('./src/questions');
+const {Questions, outputFile} = require('./src/constants');
 const {Card} = require('./src/generateCard');
 const { Manager } = require('./lib/Manager');
 const {Engineer} = require('./lib/Engineer');
 const {Intern} = require('./lib/Intern');
+const fs = require('fs');
 
 //create question variables
-const manager = questions.generalInfo.concat(questions.managerInfo);
-const engineer = questions.generalInfo.concat(questions.engineerInfo);
-const intern = questions.generalInfo.concat(questions.internInfo);
+const manager = Questions.generalInfo.concat(Questions.managerInfo);
+const engineer = Questions.generalInfo.concat(Questions.engineerInfo);
+const intern = Questions.generalInfo.concat(Questions.internInfo);
 const card = new Card();
+const profiles = '';
 
 //create user action list
 const selectAction = () => {
@@ -67,3 +69,10 @@ inquirer.prompt(manager).then(async (answers)=>{
     selectAction();
 }) 
   
+function writingFile() {
+    //create write file function
+    fs.writeFile("../dist/index.html", output, (err) => {
+    err ? console.log(err) : console.log(messages.saved);
+    });
+}
+module.exports = profiles;

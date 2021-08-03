@@ -1,22 +1,10 @@
-/* :root {
-
-} */
-/* trying to add background image but it is not appearing on screen */
-/* * {
-    background-image: url('/dist/assets/teambckgrnd.jpg');
-} */
 
 header {
-    height: 20%;
+    height: 10%;
     min-width: 100%;
     /* position: fixed; */
-    background-color: #cccccc;
+    background-color: rgb(243, 51, 51);
 }
-
-/* img {
-    height: min-content;
-    width: min-content;
-} */
 
 h1,h2 {
     font-weight: bolder;
@@ -24,12 +12,18 @@ h1,h2 {
     text-align: center;
     /* padding-top: 50px;
     padding-bottom: 50px; */
-    font-size:70px;
+    font-size:40px;
 }
 
 main {
-    background-color:aqua;
-    flex-direction: row;
+    padding: 10%;
+    width: 100%;
+    display: flex;
     flex-wrap: wrap;
     align-content: center;
+    justify-content: center;
+}
+
+.profileCard {
+  box-shadow:   0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
