@@ -1,11 +1,14 @@
-//import questions, inquirer, and classes
+//import inquirer and file writing functionality
 const inquirer = require('inquirer');
+const fs = require('fs');
+//import constants and class files
 const constantsFile = require('./src/constants');
 const {Card} = require('./src/generateCard');
 const { Manager } = require('./lib/Manager');
 const {Engineer} = require('./lib/Engineer');
 const {Intern} = require('./lib/Intern');
-const fs = require('fs');
+
+
 //create question variables
 const manager = constantsFile.generalInfo.concat(constantsFile.managerInfo);
 const engineer = constantsFile.generalInfo.concat(constantsFile.engineerInfo);
@@ -29,7 +32,7 @@ const selectAction = () => {
                 askIntern();
                 break;
             case 'Finalize Team':
-                console.log('finalizing!!');
+                // console.log('finalizing!!');
                 writingFile()
                 break;
                 
@@ -43,8 +46,8 @@ const askEngineer = () => {
     //will need to create eng. object then create card
     let newEng = new Engineer(info.name, info.id, info.email, info.github);
     profiles += card.getInfo(newEng);
-    console.log('index.js FILE'+ profiles);
-    console.log('added engineer');
+    // console.log('index.js FILE'+ profiles);
+    // console.log('added engineer');
     selectAction();
 })}
 
@@ -54,8 +57,8 @@ const askIntern =() => {
         //will need to create intern object then create card
         const newIntern = new Intern(info.name, info.id, info.email, info.school);
         profiles += card.getInfo(newIntern);
-        console.log('added intern');
-        console.log('index.js FILE'+ profiles);
+        // console.log('added intern');
+        // console.log('index.js FILE'+ profiles);
         selectAction();
     })
 }
@@ -67,7 +70,7 @@ inquirer.prompt(manager).then(async (answers)=>{
     const newMngr = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
     //add new card with given info
     profiles += card.getInfo(newMngr);
-    console.log('index.js FILE'+ profiles);
+    // console.log('index.js FILE'+ profiles);
     //prompt user with options of what to do next (continue to ask until user selects finalize)
     selectAction();
 }) 
@@ -75,7 +78,7 @@ inquirer.prompt(manager).then(async (answers)=>{
 function writingFile() {
     //create write file function
     fs.writeFile('./dist/index.html', constantsFile.writeOutput(profiles), (err) => {
-    err ? console.log(err) : console.log(profiles);
+    err ? console.log(err) : console.log('Created');
     });
 }
 module.exports = profiles;

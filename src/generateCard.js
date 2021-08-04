@@ -4,6 +4,7 @@ function Card() {
     cardList = []
 }
 
+//create individual employee card
 function createCard(addToEnd, classInfo) {
     //create individual cards here in list format
     const profileCard = `
@@ -17,17 +18,18 @@ function createCard(addToEnd, classInfo) {
                     <div class="card-body text-dark bg-light">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">ID: ${classInfo.getId()} </li>
-                            <li class="list-group-item">Email: <a href="mailto: ${classInfo.getEmail()}">emailLink</a> </li>
+                            <li class="list-group-item">Email: <a href="mailto: ${classInfo.getEmail()}">${classInfo.getEmail()}</a> </li>
                             <li class="list-group-item">${addToEnd}</li>
                         </ul>
                     </div>
                 </div>
             </div>
-        </div> `
-    console.log(profileCard);
+        </div> `;
+
     return profileCard;
 }
 
+//process info received by user
 Card.prototype.getInfo = function (createdClass) {
     let role = createdClass.getRole();
     // console.log(role);
@@ -36,9 +38,9 @@ Card.prototype.getInfo = function (createdClass) {
         case 'Manager':
             let officeNumber = createdClass.getOffice();
             addToEnd = `Office Number : ${officeNumber}`;
-           cardHtml = createCard(addToEnd, createdClass);
+            cardHtml = createCard(addToEnd, createdClass);
             break;
-            
+
         case 'Intern':
             let school = createdClass.getSchool();
             addToEnd = `School: ${school}`;
@@ -46,15 +48,15 @@ Card.prototype.getInfo = function (createdClass) {
             break;
         case 'Engineer':
             let github = createdClass.getGithub();
-            addToEnd =  `Github: ${github}`;
-            cardHtml = createCard(addToEnd , createdClass);
+            addToEnd = `Github: <a href="${github}">${github}</a>`;
+            cardHtml = createCard(addToEnd, createdClass);
             break;
     }
-    console.log('generatedCard FILE' + cardHtml);
+    // console.log('generatedCard FILE' + cardHtml);
     return cardHtml;
-    
+
 }
 
 
 
-module.exports = {Card};
+module.exports = { Card };
