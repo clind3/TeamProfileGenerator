@@ -22,8 +22,10 @@
   ## Usage
 
   User will be provided with prompts asking for the employees name, email, id, etc. depending on their role. When project first opens they will be prompted to enter information for the manager and then will be given the option to add Engineer, Intern, or to finalize profile. Once user selects to finalize profile the html file will be created and user will be able to open the site on a browser.
+  
   Please watch video example below.
-
+  
+   https://user-images.githubusercontent.com/73320520/128112824-29d0d357-ccbf-4cf5-90a7-21c97b86e5ae.mp4
 
   ## Credits
 
